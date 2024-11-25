@@ -18,6 +18,8 @@ int readFile(char* fileName){
         return 1;
     }
     printf("Ouverture du fichier");
+    char* test;
+    test = fgets(stored_file, READ_LIMIT, file);
     while (fgets(stored_file, READ_LIMIT, file) != NULL){
         printf("%s\n", stored_file);
         token = strtok_r(stored_file, " ", &state);
