@@ -46,7 +46,7 @@ struct Word* createWord(const char* word, int line_number){
     if (word == NULL ){
         printf("Pas de mot en variable.");
     }
-    new_word -> word = word;
+    new_word -> word = strdup(word);
     new_word -> count = 1;
     new_word -> next = NULL;
 
@@ -62,8 +62,9 @@ struct Word* createWord(const char* word, int line_number){
 }
 
 int checkifWordExist(struct Word* wordList, const char* word){
+    struct Word *current = wordList;
     do {
-        if(strcmp(word,wordList -> word)){
+        if(strcmp(word,wordList -> word) == 0){
             printf("Le mot existe deja");
             return 0;
         }
@@ -76,7 +77,7 @@ int checkifWordExist(struct Word* wordList, const char* word){
 void addWord(struct Word* wordList, const char* word, int line_number){
     do {
         if(strcmp(word,wordList -> word)){
-            wordList -> line_numbers;
+            wordList -> line_numbers -> index;
             return 0;
         }
         wordList = wordList -> next;
