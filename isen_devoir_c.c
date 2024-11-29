@@ -40,9 +40,18 @@ int readFile(char* fileName){
 
 }
 
+struct LineNumbers* createNewLineNumbers(int line_number){
+    if(line_number <= 0){
+        perror("ligne inferieure a 0.");
+    }
+    struct LineNumbers* new_line_numbers = (struct LineNumbers*)malloc(sizeof(struct LineNumbers));
+    new_line_numbers -> index = line_number;
+    new_line_numbers -> next == NULL;
+    return createNewLineNumbers;
+}
+
 struct Word* createWord(const char* word, int line_number){
     struct Word* new_word = (struct Word*)malloc(sizeof(struct Word));
-    struct LineNumbers* new_line_numbers = (struct LineNumbers*)malloc(sizeof(struct LineNumbers));
     if (word == NULL ){
         printf("Pas de mot en variable.");
     }
@@ -54,9 +63,7 @@ struct Word* createWord(const char* word, int line_number){
         printf("Nombre nul trouvé.");
     }
 
-    new_word -> line_numbers = new_line_numbers;
-    new_word -> line_numbers -> index = line_number;
-    new_word -> line_numbers -> next == NULL;
+    new_word -> line_numbers = createNewLineNumbers(line_number);
 
     return new_word;
 }
