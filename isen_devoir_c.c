@@ -81,6 +81,19 @@ int checkifWordExist(struct Word* wordList, const char* word){
     return 1;
 }
 
+int checkifLignExist(struct LineNumbers* list_line, int line_number){
+    struct LineNumbers *current = list_line;
+    do {
+        if(list_line -> index == line_number){
+            printf("La ligne existe deja");
+            return 0;
+        }
+        list_line = list_line -> next;
+    } while (list_line == NULL);
+    printf("Nouveau mot trouve");
+    return 1;
+}
+
 void addWord(struct Word* wordList, const char* word, int line_number){
     do {
         if(strcmp(word,wordList -> word)){
