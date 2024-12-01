@@ -46,8 +46,8 @@ struct LineNumbers* createNewLineNumbers(int line_number){
     }
     struct LineNumbers* new_line_numbers = (struct LineNumbers*)malloc(sizeof(struct LineNumbers));
     new_line_numbers -> index = line_number;
-    new_line_numbers -> next == NULL;
-    return createNewLineNumbers;
+    new_line_numbers -> next = NULL;
+    return new_line_numbers;
 }
 
 struct Word* createWord(const char* word, int line_number){
@@ -70,40 +70,62 @@ struct Word* createWord(const char* word, int line_number){
 
 int checkifWordExist(struct Word* wordList, const char* word){
     struct Word *current = wordList;
-    do {
-        if(strcmp(word,wordList -> word) == 0){
+    while (current != NULL){
+        if(strcmp(word,current -> word) == 0){
             printf("Le mot existe deja");
-            return 0;
+            return 1;
         }
-        wordList = wordList -> next;
-    } while (wordList == NULL);
+        current = current -> next;
+    } 
     printf("Nouveau mot trouve");
-    return 1;
+    return 0;
 }
 
 int checkifLignExist(struct LineNumbers* list_line, int line_number){
     struct LineNumbers *current = list_line;
-    do {
-        if(list_line -> index == line_number){
+    while(current != NULL) {
+        if(current -> index == line_number){
             printf("La ligne existe deja");
-            return 0;
+            return 1;
         }
-        list_line = list_line -> next;
-    } while (list_line == NULL);
+        current = current -> next;
+    }
     printf("Nouveau mot trouve");
-    return 1;
+    return 0;
 }
 
 void addWord(struct Word* wordList, const char* word, int line_number){
-    do {
-        if(strcmp(word,wordList -> word)){
-            wordList -> line_numbers -> index;
+    struct Word* current = wordList;
+    
+     while (current != NULL) {
+        if (strcmp(word, current->word) == 0) {
+            if (!checkifLignExist(current->line_numbers, line_number)) {
+                struct LineNumbers* new_line = createNewLineNumbers(line_number);
+                new_line->next = current->line_numbers;
+                current->line_numbers = new_line;
+                current->count++;
+            }
             return 0;
         }
+        current = current -> next;
+     }
+
+    struct Word* new_word = createWord(word, line_number);
+    new_word->next = wordList;
+    wordList = new_word;
+}
+
+void printWords(struct Word* wordList){
+    while(wordList != NULL){
+        printf("Mot %s, Occurence %d\n",wordList -> word, wordList->count);
+        printf("Lignes : ");
+        while(wordList -> line_numbers != NULL){
+            printf("%d",wordList -> line_numbers ->index);
+            wordList -> line_numbers = wordList -> line_numbers -> next;
+        }
+        printf("\n");
         wordList = wordList -> next;
-    } while (wordList == NULL);
-    printf("Nouveau mot trouve");
-    return 1;
+    }
 }
 
 
