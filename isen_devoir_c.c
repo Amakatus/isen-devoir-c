@@ -55,7 +55,7 @@ int checkifWordExist(struct Word* wordList, const char* word){
         }
         current = current -> next;
     } 
-    printf("Nouveau mot trouve");
+    printf("Nouveau mot trouve : \n");
     return 0;
 }
 
@@ -68,50 +68,52 @@ int checkifLignExist(struct LineNumbers* list_line, int line_number){
         }
         current = current -> next;
     }
-    printf("Nouveau mot trouve");
+    printf("Ajout de la ligne %d au mot ",line_number);
     return 0;
 }
 
 
-void addWord(struct Word* wordList, const char* word, int line_number){
-    struct Word* current = wordList;
-    
-     while (current != NULL) {
+void addWord(struct Word** wordList, const char* word, int line_number) {
+    struct Word* current = *wordList;
+
+    while (current != NULL) {
         if (strcmp(word, current->word) == 0) {
-            if (!checkifLignExist(current->line_numbers, line_number)) {
+            if (checkifLignExist(current->line_numbers, line_number) == 0) {
                 struct LineNumbers* new_line = createNewLineNumbers(line_number);
                 new_line->next = current->line_numbers;
                 current->line_numbers = new_line;
                 current->count++;
-            } else {
-                printf("Ligne deja existante");
             }
+            return;
         }
-        current = current -> next;
-     }
+        current = current->next;
+    }
 
     struct Word* new_word = createWord(word, line_number);
-    new_word->next = wordList;
-    wordList = new_word;
+    new_word->next = *wordList;
+    *wordList = new_word;
 }
 
-int readFile(char* fileName,struct Word* wordList){
+
+
+int readFile(char* fileName, struct Word** wordList) {
     FILE *file;
     char* state;
     char* token;
     char stored_file[READ_LIMIT];
-    file = fopen(fileName,"r");
-    if (file == NULL){
+    file = fopen(fileName, "r");
+    if (file == NULL) {
         printf("Erreur à l'ouverture du fichier");
         return 1;
     }
     int line_number = 1;
     printf("Ouverture du fichier...\n");
     while (fgets(stored_file, READ_LIMIT, file) != NULL) {
-        printf("Ligne lue : %d %s \n",line_number,stored_file);
+        printf("Ligne lue : %d %s \n", line_number, stored_file);
         token = strtok_r(stored_file, " ", &state);
         while (token != NULL) {
-            addWord(wordList,token,line_number);
+            printf("%s\n", token);
+            addWord(wordList, token, line_number);
             token = strtok_r(NULL, " ", &state);
         }
         line_number++;
@@ -119,19 +121,17 @@ int readFile(char* fileName,struct Word* wordList){
 
     fclose(file);
     return 0;
-
 }
-
-
 
 
 void printWords(struct Word* wordList){
     while(wordList != NULL){
-        printf("Mot %s, Occurence %d\n",wordList -> word, wordList->count);
-        printf("Lignes : ");
-        while(wordList -> line_numbers != NULL){
-            printf("%d",wordList -> line_numbers ->index);
-            wordList -> line_numbers = wordList -> line_numbers -> next;
+        printf("Mot : %s \nOccurence : %d\n",wordList -> word, wordList->count);
+        printf("Lignes : \n");
+        struct LineNumbers* current_line = wordList->line_numbers;
+        while(current_line != NULL){
+            printf("L%d \n",current_line ->index);
+            current_line = current_line -> next;
         }
         printf("\n");
         wordList = wordList -> next;
@@ -142,7 +142,7 @@ void printWords(struct Word* wordList){
 int main(int argc, char const *argv[])
 {
     struct Word* wordList = NULL;
-    readFile("test.txt",wordList);
+    readFile("test.txt",&wordList);
     printWords(wordList);
     return 0;
 }
