@@ -138,11 +138,27 @@ void printWords(struct Word* wordList){
     }
 }
 
+void freeStructs(struct Word* wordList){
+    while(wordList != NULL){
+        struct LineNumbers* current_line = wordList->line_numbers;
+        while(current_line != NULL){
+            struct LineNumbers* temp_line = current_line;
+            current_line = current_line->next;
+            free(temp_line);
+        }
+        struct Word* temp_word = wordList;
+        wordList = wordList->next;
+        free(temp_word->word);
+        free(temp_word);
+    }
+}
+
 
 int main(int argc, char const *argv[])
 {
     struct Word* wordList = NULL;
     readFile("test.txt",&wordList);
     printWords(wordList);
+    freeStructs(wordList);
     return 0;
 }
