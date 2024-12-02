@@ -1,5 +1,4 @@
 Bonjour le monde
-Bonjour le monde
 Ceci est un test
 Programme C
 Bonjour le monde
