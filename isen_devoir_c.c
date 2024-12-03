@@ -8,7 +8,7 @@
 struct Word {
     char* word;
     struct LineNumbers* line_numbers;
-    int count; // occurence de mots
+    int count;
     struct Word *next;
 };
 
@@ -102,7 +102,23 @@ void addWord(struct Word** wordList, const char* word, int line_number) {
     *wordList = new_word;
 }
 
-
+void searchWord(struct Word* wordList, const char* word){
+    while(wordList != NULL){
+        if(strcmp(wordList->word,word) == 0){
+            printf("Mot trouve dans le fichier : %s\n",wordList->word);
+            printf("Occurence %d\n",wordList->count);
+            printf("Lignes : \n");
+            struct LineNumbers* current_line = wordList->line_numbers;
+            while (current_line != NULL) {
+                printf("L%d (%d fois) ", current_line->index, current_line -> count_per_lign);
+                current_line = current_line->next;
+            }
+            return;
+        }
+        wordList = wordList -> next;
+    }
+    printf("Mot non trouve %s",word);
+}
 
 
 int readFile(char* fileName, struct Word** wordList) {
@@ -166,12 +182,15 @@ void freeStructs(struct Word* wordList){
     }
 }
 
+void lower_string_file
+
 
 int main(int argc, char const *argv[])
 {
     struct Word* wordList = NULL;
     readFile("test.txt",&wordList);
     printWords(wordList);
+    searchWord(wordList,"Bonjour");
     freeStructs(wordList);
     return 0;
 }
