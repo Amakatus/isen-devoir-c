@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 
 #define PROJECT_NAME "isen-devoir-c"
 #define READ_LIMIT 200
@@ -47,6 +48,7 @@ struct Word* createWord(const char* word, int line_number){
 
     return new_word;
 }
+
 
 int checkifWordExist(struct Word* wordList, const char* word){
     struct Word *current = wordList;
@@ -120,6 +122,22 @@ void searchWord(struct Word* wordList, const char* word){
     printf("Mot non trouve %s",word);
 }
 
+void listExtFile(const char *argv[]){ // Pas tres utile , mieux vaut verifier par exemple les 50 premiers caracteres
+    DIR *dir;
+    struct dirent *dent;
+    dir = opendir(argv[1]);
+    if(dir != NULL){
+        while((dent=readdir(dir)) != NULL){
+            if((strcmp(dent->d_name,".")==0 || strcmp(dent->d_name,"..")==0 || (*dent->d_name) == '.' )){
+            } else {
+                if((strcmp(dent -> d_name + strlen(dent -> d_name) - 4,".txt")) == 0){
+                    printf("ce fichier est un txt : %s \n", dent -> d_name);
+                }
+            }
+        }
+    }
+    closedir(dir);
+}
 
 int readFile(char* fileName, struct Word** wordList) {
     FILE *file;
@@ -182,15 +200,15 @@ void freeStructs(struct Word* wordList){
     }
 }
 
-void lower_string_file
 
 
 int main(int argc, char const *argv[])
 {
-    struct Word* wordList = NULL;
-    readFile("test.txt",&wordList);
-    printWords(wordList);
-    searchWord(wordList,"Bonjour");
-    freeStructs(wordList);
+    //struct Word* wordList = NULL;
+    listTxtFile(argv);
+    //readFile("./samples/test.txt",&wordList);
+    //printWords(wordList);
+    //searchWord(wordList,"Bonjour");
+    //freeStructs(wordList);
     return 0;
 }

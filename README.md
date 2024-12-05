@@ -3,14 +3,11 @@ Mon projet de C est un moteur de recherche plein texte qui permets de rechercher
 
 TODO : 
 
-Pas de case sensitive ou Non : Unix System -> strcasecmp / Microsoft -> stricmp 
-Rechercher un mot exact
-Rechercher un mot partiel (*)
-Renvoyer la ligne complète ou le mot est envoyé (couleur ?)
-Ajout d'un menu interactif
-
-Optimisation  ? 
-
-Indexer les mots
-Utiliser un arbre ?
-Raylib
+Pas de case sensitive ou Non : stricmp
+Rechercher un mot partiel (* ajout des wildcards)
+Renvoyer la ligne complète ou le mot est envoyé
+Ajout d'un menu interactif Raylib RayGUI
+Permettre la recherche de plusieurs mots strict ou avec un OU.
+Plusieurs fichiers en parametres
+Indexation
+Fichier header / séparée
