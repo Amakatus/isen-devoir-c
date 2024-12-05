@@ -6,8 +6,14 @@
 #define PROJECT_NAME "isen-devoir-c"
 #define READ_LIMIT 200
 
+struct LinkedList{
+    struct LinkedList *next;
+    void* data;
+};
+
 struct Word {
     char* word;
+    FILE file;
     struct LineNumbers* line_numbers;
     int count;
     struct Word *next;
@@ -19,6 +25,14 @@ struct LineNumbers {
     struct LineNumbers *next;
 };
 
+//LinkedList generique
+
+struct LinkedList* newLinkedList(void* data){
+    struct LinkedList* new_ll = (struct LinkedList*)malloc(sizeof(struct LinkedList));
+    new_ll -> next = NULL;
+    new_ll -> data = data;
+    return new_ll; 
+}
 
 struct LineNumbers* createNewLineNumbers(int line_number){
     if(line_number <= 0){
@@ -38,15 +52,14 @@ struct Word* createWord(const char* word, int line_number){
     }
     new_word -> word = strdup(word);
     new_word -> count = 1;
-    new_word -> next = NULL;
 
     if (line_number == 0) {
         printf("Nombre nul trouvé.");
     }
 
     new_word -> line_numbers = createNewLineNumbers(line_number);
-
-    return new_word;
+    struct LinkedList* new_ll = newLinkedList(new_word);
+    return new_ll;
 }
 
 
