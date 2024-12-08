@@ -36,13 +36,15 @@ int readFile(char* fileName, struct LinkedList** wordList) {
     return 0;
 }
 
-void listSafeFile(const char *argv[]){
+char *[] listSafeFile(const char *argv[]){
     DIR *dir;
     struct dirent *dent;
     FILE *file;
     char stored_file[READ_LIMIT];
     char file_path[READ_LIMIT];
     int i;
+    int y = 0;
+    char* safe_file[10];
     dir = opendir(argv[1]);
     if(dir != NULL){
         while((dent=readdir(dir)) != NULL){
@@ -68,9 +70,11 @@ void listSafeFile(const char *argv[]){
 
                 if(count < 30){
                     printf("le fichier %s est un fichier valide\n",dent -> d_name);
+                    safe_file[y] = dent->d_name;
                 } else {
                     printf("le fichier %s est un fichier invalide\n", dent -> d_name);
                 }
+                y++;
 
                 fclose(file);
             }

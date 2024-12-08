@@ -3,5 +3,9 @@ project('isen-devoir-c', 'c',
   default_options : ['warning_level=3'])
 
 cc = meson.get_compiler('c')
+incdir = include_directories('include')
 
-exe = executable('c-search', 'src/main.c')
+src = files('src/main.c', 'src/file.c', 'src/linkedlist.c', 'src/word.c','src/linenumbers.c')
+
+
+exe = executable('c-search', src, include_directories : incdir)

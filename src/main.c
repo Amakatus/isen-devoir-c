@@ -7,10 +7,10 @@
 int main(int argc, char const *argv[])
 {
     struct LinkedList* wordList = NULL;
-    listSafeFile(argv);
+    char* safe_file[10] = listSafeFile(argv);
     readFile("./samples/test.txt",&wordList);
     printWords(wordList);
-    //searchWord(wordList,"Bonjour");
+    searchWord(wordList,"Bonjour");
     freeStructs(wordList);
     return 0;
 }
