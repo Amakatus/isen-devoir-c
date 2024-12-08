@@ -4,4 +4,4 @@ project('isen-devoir-c', 'c',
 
 cc = meson.get_compiler('c')
 
-exe = executable('isen_devoir_c', 'src/isen_devoir_c.c')
+exe = executable('c-search', 'src/main.c')

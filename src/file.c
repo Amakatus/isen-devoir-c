@@ -1,4 +1,5 @@
-#include "./include/readfile.h"
+#include "include/file.h"
+#include "include/word.h"
 #include "stdio.h"
 #include <stdlib.h>
 #include "dirent.h"
