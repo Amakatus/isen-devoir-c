@@ -36,7 +36,7 @@ int readFile(char* fileName, struct LinkedList** wordList) {
     return 0;
 }
 
-char *[] listSafeFile(const char *argv[]){
+void listSafeFile(const char *argv[]){
     DIR *dir;
     struct dirent *dent;
     FILE *file;

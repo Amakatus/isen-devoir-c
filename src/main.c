@@ -7,7 +7,7 @@
 int main(int argc, char const *argv[])
 {
     struct LinkedList* wordList = NULL;
-    char* safe_file[10] = listSafeFile(argv);
+    listSafeFile(argv);
     readFile("./samples/test.txt",&wordList);
     printWords(wordList);
     searchWord(wordList,"Bonjour");
