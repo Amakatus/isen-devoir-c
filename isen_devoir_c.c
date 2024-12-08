@@ -125,7 +125,7 @@ void searchWord(struct LinkedList* linkedList, const char* word){
     printf("Mot non trouve %s",word);
 }
 
-void listSafeFile(const char *argv[]){ // Pas tres utile , mieux vaut verifier par exemple les 50 premiers caracteres
+void listSafeFile(const char *argv[]){
     DIR *dir;
     struct dirent *dent;
     FILE *file;
@@ -140,22 +140,22 @@ void listSafeFile(const char *argv[]){ // Pas tres utile , mieux vaut verifier p
                 snprintf(file_path, READ_LIMIT, "%s/%s", argv[1],dent->d_name);
                 file = fopen(file_path, "r");
 
-                int is_valid = 1;
+                int count = 1;
                 while (fgets(stored_file, READ_LIMIT, file) != NULL) {
                     i = 0;
                     while (i < READ_LIMIT && stored_file[i] != '\0') {
                         if ((stored_file[i] < 32 || stored_file[i] > 122) && stored_file[i] != '\n') {
-                            is_valid++;
+                            count++;
                             break;
                         }
                         i++;
                     }
-                    if (!is_valid) {
+                    if (!count) {
                         break;
                     }
                 }
 
-                if(is_valid < 30){
+                if(count < 30){
                     printf("le fichier %s est un fichier valide\n",dent -> d_name);
                 } else {
                     printf("le fichier %s est un fichier invalide\n", dent -> d_name);
@@ -198,23 +198,21 @@ int readFile(char* fileName, struct LinkedList** wordList) {
 
 
 void printWords(struct LinkedList* linkedList) {
-    struct Word* wordList = (struct Word*) linkedList -> data;
-    while (wordList != NULL) {
+    while (linkedList != NULL) {
+        struct Word* wordList = (struct Word*) linkedList->data;
         printf("Mot : %s\n", wordList->word);
-        printf("Occurence : %d\n", wordList->count);
+        printf("Occurrence : %d\n", wordList->count);
         printf("Lignes : ");
-        struct LinkedList* line = wordList -> line_numbers;
-        while(line != NULL) {
-            struct LineNumbers* current_line = (struct LineNumbers*) line ->data;
-            printf("L%d (%d fois) ", current_line->index, current_line -> count_per_lign);
+        struct LinkedList* line = wordList->line_numbers;
+        while (line != NULL) {
+            struct LineNumbers* current_line = (struct LineNumbers*) line->data;
+            printf("L%d (%d fois) ", current_line->index, current_line->count_per_lign);
             line = line->next;
         }
         printf("\n");
-
         linkedList = linkedList->next;
     }
 }
-
 
 void freeStructs(struct LinkedList* linkedList){
     while(linkedList != NULL){
@@ -240,11 +238,11 @@ void freeStructs(struct LinkedList* linkedList){
 
 int main(int argc, char const *argv[])
 {
-    //struct LinkedList* wordList = NULL;
+    struct LinkedList* wordList = NULL;
     listSafeFile(argv);
-    //readFile("./samples/test.txt",&wordList);
-    //printWords(wordList);
+    readFile("./samples/test.txt",&wordList);
+    printWords(wordList);
     //searchWord(wordList,"Bonjour");
-    //freeStructs(wordList);
+    freeStructs(wordList);
     return 0;
 }
