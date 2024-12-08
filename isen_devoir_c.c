@@ -4,7 +4,7 @@
 #include <dirent.h>
 
 #define PROJECT_NAME "isen-devoir-c"
-#define READ_LIMIT 200
+#define READ_LIMIT 300
 
 struct LinkedList{
     struct LinkedList *next;
@@ -125,17 +125,43 @@ void searchWord(struct LinkedList* linkedList, const char* word){
     printf("Mot non trouve %s",word);
 }
 
-void listExtFile(const char *argv[]){ // Pas tres utile , mieux vaut verifier par exemple les 50 premiers caracteres
+void listSafeFile(const char *argv[]){ // Pas tres utile , mieux vaut verifier par exemple les 50 premiers caracteres
     DIR *dir;
     struct dirent *dent;
+    FILE *file;
+    char stored_file[READ_LIMIT];
+    char file_path[READ_LIMIT];
+    int i;
     dir = opendir(argv[1]);
     if(dir != NULL){
         while((dent=readdir(dir)) != NULL){
             if((strcmp(dent->d_name,".")==0 || strcmp(dent->d_name,"..")==0 || (*dent->d_name) == '.' )){
             } else {
-                if((strcmp(dent -> d_name + strlen(dent -> d_name) - 4,".txt")) == 0){
-                    printf("ce fichier est un txt : %s \n", dent -> d_name);
+                snprintf(file_path, READ_LIMIT, "%s/%s", argv[1],dent->d_name);
+                file = fopen(file_path, "r");
+
+                int is_valid = 1;
+                while (fgets(stored_file, READ_LIMIT, file) != NULL) {
+                    i = 0;
+                    while (i < READ_LIMIT && stored_file[i] != '\0') {
+                        if (stored_file[i] < 32 || stored_file[i] > 122) {
+                            is_valid++;
+                            break;
+                        }
+                        i++;
+                    }
+                    if (!is_valid) {
+                        break;
+                    }
                 }
+
+                if(is_valid < 30){
+                    printf("le fichier %s est un fichier valide\n",dent -> d_name);
+                } else {
+                    printf("le fichier %s est un fichier invalide\n", dent -> d_name);
+                }
+
+                fclose(file);
             }
         }
     }
@@ -214,11 +240,11 @@ void freeStructs(struct LinkedList* linkedList){
 
 int main(int argc, char const *argv[])
 {
-    struct LinkedList* wordList = NULL;
-    //listTxtFile(argv);
-    readFile("./samples/test.txt",&wordList);
-    printWords(wordList);
-    searchWord(wordList,"Bonjour");
-    freeStructs(wordList);
+    //struct LinkedList* wordList = NULL;
+    listSafeFile(argv);
+    //readFile("./samples/test.txt",&wordList);
+    //printWords(wordList);
+    //searchWord(wordList,"Bonjour");
+    //freeStructs(wordList);
     return 0;
 }
