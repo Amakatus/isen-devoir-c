@@ -27,7 +27,7 @@ struct LinkedList* newLinkedList(void* data){
     struct LinkedList* new_ll = (struct LinkedList*)malloc(sizeof(struct LinkedList));
     new_ll -> next = NULL;
     new_ll -> data = data;
-    return new_ll; 
+    return new_ll;
 }
 
 struct LinkedList* createNewLineNumbers(int line_number){
@@ -68,7 +68,7 @@ int checkifWordExist(struct LinkedList* wordList, const char* word){
             return 1;
         }
         current = current -> next;
-    } 
+    }
     return 0;
 }
 
@@ -107,7 +107,7 @@ void addWord(struct LinkedList** wordList, const char* word, int line_number) {
 
 void searchWord(struct LinkedList* linkedList, const char* word){
     while(linkedList != NULL){
-        struct Word* wordList = (struct Word*) linkedList -> data; 
+        struct Word* wordList = (struct Word*) linkedList -> data;
         if(strcmp(wordList->word,word) == 0){
             printf("Mot trouve dans le fichier : %s\n",wordList->word);
             printf("Occurence %d\n",wordList->count);
