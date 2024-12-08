@@ -144,7 +144,7 @@ void listSafeFile(const char *argv[]){ // Pas tres utile , mieux vaut verifier p
                 while (fgets(stored_file, READ_LIMIT, file) != NULL) {
                     i = 0;
                     while (i < READ_LIMIT && stored_file[i] != '\0') {
-                        if (stored_file[i] < 32 || stored_file[i] > 122) {
+                        if ((stored_file[i] < 32 || stored_file[i] > 122) && stored_file[i] != '\n') {
                             is_valid++;
                             break;
                         }
