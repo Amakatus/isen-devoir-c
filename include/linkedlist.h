@@ -1,4 +1,5 @@
 #ifndef CREATELINKEDLIST_H
+#define CREATELINKEDLIST_H
 
 struct LinkedList{
     struct LinkedList *next;

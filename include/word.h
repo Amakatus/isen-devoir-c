@@ -1,17 +1,17 @@
 #ifndef CREATE_WORD_H
-#include <stdio.h>
+#define CREATE_WORD_H
 
 struct LinkedList;
 
 struct Word {
     char* word;
-    FILE file;
+    struct File* file;
     struct LinkedList* line_numbers;
     int count;
 };
 
 struct LinkedList* createWord(const char* word, int line_number);
-int checkifWordExist(struct LinkedList* wordList, const char* word);
+int checkIfWordExist(struct LinkedList* wordList, const char* word);
 void addWord(struct LinkedList** wordList, const char* word, int line_number);
 void searchWord(struct LinkedList* linkedList, const char* word, int casesensitive);
 void printWords(struct LinkedList* linkedList);

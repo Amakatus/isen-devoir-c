@@ -1,5 +1,5 @@
 #ifndef CREATELINENUMBERS_H
-
+#define CREATELINENUMBERS_H
 struct LineNumbers {
     int index;
     int count_per_lign;

@@ -1,5 +1,6 @@
 #include "include/file.h"
 #include "include/word.h"
+#include "linkedlist.h"
 #include "stdio.h"
 #include <stdlib.h>
 #include "dirent.h"
@@ -7,6 +8,12 @@
 
 #define READ_LIMIT 300
 
+struct LinkedList* createFile(char* fileName){
+    struct LinkedList* new_ll = (struct LinkedList*)malloc(sizeof(struct LinkedList));
+    new_ll->next = NULL;
+    new_ll->data = fileName;
+    return new_ll;
+}
 
 int readFile(char* fileName, struct LinkedList** wordList) {
     FILE *file;
@@ -69,10 +76,10 @@ void listSafeFile(const char *argv[]){
                 }
 
                 if(count < 30){
-                    printf("le fichier %s est un fichier valide\n",dent -> d_name);
+                    printf("le fichier %s est un fichier valide\n",dent->d_name);
                     safe_file[y] = dent->d_name;
                 } else {
-                    printf("le fichier %s est un fichier invalide\n", dent -> d_name);
+                    printf("le fichier %s est un fichier invalide\n", dent->d_name);
                 }
                 y++;
 

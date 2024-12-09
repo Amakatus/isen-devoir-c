@@ -11,27 +11,27 @@ struct LinkedList* createWord(const char* word, int line_number){
 	if (word == NULL ){
 		printf("Pas de mot en variable.");
 	}
-	new_word -> word = strdup(word);
-	new_word -> count = 1;
+	new_word->word = strdup(word);
+	new_word->count = 1;
 
 	if (line_number == 0) {
 		printf("Nombre nul trouve.");
 	}
 
-	new_word -> line_numbers = createNewLineNumbers(line_number);
+	new_word->line_numbers = createNewLineNumbers(line_number);
 	struct LinkedList* new_ll = newLinkedList(new_word);
 	return new_ll;
 }
 
-int checkifWordExist(struct LinkedList* wordList, const char* word){
+int checkIfWordExist(struct LinkedList* wordList, const char* word){
 	struct LinkedList* current = wordList;
 	while (current != NULL){
-		struct Word* current_word = (struct Word*) current -> data;
-		if(strcmp(word,current_word -> word) == 0){
+		struct Word* current_word = (struct Word*) current->data;
+		if(strcmp(word,current_word->word) == 0){
 			printf("Le mot existe deja");
 			return 1;
 		}
-		current = current -> next;
+		current = current->next;
 	}
 	return 0;
 }
@@ -71,7 +71,6 @@ void addWord(struct LinkedList** wordList, const char* word, int line_number) {
 void searchWord(struct LinkedList* linkedList, const char* word, int casesensitive) {
     while (linkedList != NULL) {
         struct Word* wordList = (struct Word*) linkedList->data;
-		printf("Comparing '%s' with '%s' (casesensitive: %d)\n", wordList->word, word, casesensitive);
         if ((casesensitive == 0 && strcasecmp(wordList->word, word) == 0) || 
             (casesensitive == 1 && strcmp(wordList->word, word) == 0)) {
             printf("Mot trouve dans le fichier : %s\n", wordList->word);
