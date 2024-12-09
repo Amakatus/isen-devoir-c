@@ -13,7 +13,7 @@ struct Word {
 struct LinkedList* createWord(const char* word, int line_number);
 int checkifWordExist(struct LinkedList* wordList, const char* word);
 void addWord(struct LinkedList** wordList, const char* word, int line_number);
-void searchWord(struct LinkedList* linkedList, const char* word);
+void searchWord(struct LinkedList* linkedList, const char* word, int casesensitive);
 void printWords(struct LinkedList* linkedList);
 
 #endif

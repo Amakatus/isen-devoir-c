@@ -9,8 +9,8 @@ int main(int argc, char const *argv[])
     struct LinkedList* wordList = NULL;
     listSafeFile(argv);
     readFile("./samples/test.txt",&wordList);
-    printWords(wordList);
-    searchWord(wordList,"Bonjour");
+    //printWords(wordList);
+    searchWord(wordList, "Bonjour", 1);
     freeStructs(wordList);
     return 0;
 }
