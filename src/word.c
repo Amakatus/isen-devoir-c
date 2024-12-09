@@ -93,7 +93,7 @@ void printWords(struct LinkedList* linkedList) {
 	while (linkedList != NULL) {
 		struct Word* wordList = (struct Word*) linkedList->data;
 		printf("Mot : %s\n", wordList->word);
-		printf("Occurren	ce : %d\n", wordList->count);
+		printf("Occurrence : %d\n", wordList->count);
 		printf("Lignes : ");
 		struct LinkedList* line = wordList->line_numbers;
 		while (line != NULL) {

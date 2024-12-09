@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "include/file.h"
 #include "include/word.h"
+#include "include/search.h"
 
 #define MAX_FILES 40
 #define PROJECT_NAME "C-search"
@@ -14,8 +15,8 @@ int main(int argc, char const *argv[])
         printf("\n------------NOUVEAU FICHIER-----------\n\n");
         struct LinkedList* wordList = NULL;
         if (readFile(safe_files[i], &wordList) == 0) {
-            printWords(wordList);
-            searchWord(wordList, "Bonjour", 0);
+            //printWords(wordList);
+            searchExactWord(wordList, "Bonjour");
         }
         freeStructs(wordList);
     }

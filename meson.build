@@ -5,7 +5,7 @@ project('isen-devoir-c', 'c',
 cc = meson.get_compiler('c')
 incdir = include_directories('include')
 
-src = files('src/main.c', 'src/file.c', 'src/linkedlist.c', 'src/word.c','src/linenumbers.c')
+src = files('src/main.c', 'src/file.c', 'src/linkedlist.c', 'src/word.c','src/linenumbers.c','src/filters.c','src/search.c')
 
 
 exe = executable('c-search', src, include_directories : incdir)
