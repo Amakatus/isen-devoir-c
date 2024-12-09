@@ -26,3 +26,14 @@ void freeStructs(struct LinkedList* linkedList){
         free(temp);
     }
 }
+
+void* LinkedListSearch(struct LinkedList* data, int (*filter)(void* data, void* type), void* type){
+    struct LinkedList* current = data;
+    while (current != NULL){
+        if(filter(current->data, type)){
+            return current->data;
+        }
+        current = current->next;
+    }
+    return NULL;
+}
