@@ -8,6 +8,5 @@ struct File {
 
 struct LinkedList* createFile(char* fileName);
 int readFile(char* fileName, struct LinkedList** wordList);
-void listSafeFile(const char *argv[]);
-
+void sendSafeFile(const char *argv[], char* safe_file[], int* safe_file_count);
 #endif

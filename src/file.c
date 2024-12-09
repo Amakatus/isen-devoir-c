@@ -28,10 +28,8 @@ int readFile(char* fileName, struct LinkedList** wordList) {
     int line_number = 1;
     printf("Ouverture du fichier...\n");
     while (fgets(stored_file, READ_LIMIT, file) != NULL) {
-        //printf("Ligne lue : %d %s \n", line_number, stored_file);
         token = strtok_r(stored_file," ", &state);
         while (token != NULL) {
-            //printf("%s\n", token);
             token[strcspn(token, "\n")] = 0;
             addWord(wordList, token, line_number);
             token = strtok_r(NULL," ", &state);
@@ -43,48 +41,48 @@ int readFile(char* fileName, struct LinkedList** wordList) {
     return 0;
 }
 
-void listSafeFile(const char *argv[]){
+void sendSafeFile(const char *argv[], char* safe_file[], int* safe_file_count) {
     DIR *dir;
     struct dirent *dent;
     FILE *file;
     char stored_file[READ_LIMIT];
     char file_path[READ_LIMIT];
     int i;
-    int y = 0;
-    char* safe_file[10];
     dir = opendir(argv[1]);
-    if(dir != NULL){
-        while((dent=readdir(dir)) != NULL){
-            if((strcmp(dent->d_name,".")==0 || strcmp(dent->d_name,"..")==0 || (*dent->d_name) == '.' )){
-            } else {
-                snprintf(file_path, READ_LIMIT, "%s/%s", argv[1],dent->d_name);
-                file = fopen(file_path, "r");
+    if (dir != NULL) {
+        while ((dent = readdir(dir)) != NULL) {
+            if (strcmp(dent->d_name, ".") == 0 || strcmp(dent->d_name, "..") == 0 || dent->d_name[0] == '.') {
+                continue; // au lieu des else ?
+            }
+            
+            snprintf(file_path, READ_LIMIT, "%s/%s", argv[1], dent->d_name);
+            file = fopen(file_path, "r");
+            if (file == NULL) {
+                continue;
+            }
 
-                int count = 1;
-                while (fgets(stored_file, READ_LIMIT, file) != NULL) {
-                    i = 0;
-                    while (i < READ_LIMIT && stored_file[i] != '\0') {
-                        if ((stored_file[i] < 32 || stored_file[i] > 122) && stored_file[i] != '\n') {
-                            count++;
-                            break;
-                        }
-                        i++;
-                    }
-                    if (!count) {
+            int count = 1;
+            while (fgets(stored_file, READ_LIMIT, file) != NULL) {
+                i = 0;
+                while (i < READ_LIMIT && stored_file[i] != '\0') {
+                    if ((stored_file[i] < 32 || stored_file[i] > 122) && stored_file[i] != '\n') {
+                        count++;
                         break;
                     }
+                    i++;
                 }
-
-                if(count < 30){
-                    printf("le fichier %s est un fichier valide\n",dent->d_name);
-                    safe_file[y] = dent->d_name;
-                } else {
-                    printf("le fichier %s est un fichier invalide\n", dent->d_name);
-                }
-                y++;
-
-                fclose(file);
+                if (count >= 30) break;
             }
+
+            if (count < 30) {
+                printf("Le fichier %s est valide\n", dent->d_name);
+                safe_file[*safe_file_count] = strdup(file_path); // Ajoute le chemin complet du fichier
+                (*safe_file_count)++;
+            } else {
+                printf("Le fichier %s est invalide\n", dent->d_name);
+            }
+
+            fclose(file);
         }
     }
     closedir(dir);
