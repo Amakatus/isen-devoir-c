@@ -5,6 +5,8 @@ TODO :
 
 
 attention au nommage / écriture (->)
+Readme Propre
+CamelCase fait 
 réduire les fonctions 
 dOxygen se renseigner
 revoir la gestion des erreurs du token extrait
