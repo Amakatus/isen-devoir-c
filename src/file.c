@@ -34,7 +34,7 @@ int read_file(char* fileName, struct LinkedList** wordList) {
     return 0;
 }
 
-void send_safe_file(const char *argv[], char* safe_file[], int* safe_file_count) {
+void send_safe_file(const char *argv[], char* safeFiles[], int* safeFileCount) {
     DIR *dir;
     struct dirent *dent;
     FILE *file;
@@ -45,7 +45,7 @@ void send_safe_file(const char *argv[], char* safe_file[], int* safe_file_count)
     if (dir != NULL) {
         while ((dent = readdir(dir)) != NULL) {
             if (strcmp(dent->d_name, ".") == 0 || strcmp(dent->d_name, "..") == 0 || dent->d_name[0] == '.') {
-                continue; // au lieu des else ?
+                continue;
             }
             
             snprintf(file_path, READ_LIMIT, "%s/%s", argv[1], dent->d_name);
@@ -69,8 +69,8 @@ void send_safe_file(const char *argv[], char* safe_file[], int* safe_file_count)
 
             if (count < 30) {
                 printf("Le fichier %s est valide\n", dent->d_name);
-                safe_file[*safe_file_count] = strdup(file_path); // Ajoute le chemin complet du fichier
-                (*safe_file_count)++;
+                safeFiles[*safeFileCount] = strdup(file_path);
+                (*safeFileCount)++;
             } else {
                 printf("Le fichier %s est invalide\n", dent->d_name);
             }

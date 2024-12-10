@@ -11,10 +11,9 @@ struct Word {
     int count;
 };
 
-struct LinkedList* create_word(const char* word, int line_number,const char* fileName);
+struct LinkedList* create_word(const char* word, int lineNumber,const char* fileName);
 int check_if_word_exist(struct LinkedList* wordList, const char* word);
-void add_word(struct LinkedList** wordList, const char* word, int line_number,const char* fileName);
-void search_word(struct LinkedList* linkedList, const char* word, int casesensitive);
+void add_word(struct LinkedList** wordList, const char* word, int lineNumber,const char* fileName);
 void print_words(struct LinkedList* linkedList);
 
 

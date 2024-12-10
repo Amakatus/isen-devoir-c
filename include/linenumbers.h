@@ -5,6 +5,6 @@ struct LineNumbers {
     int count_per_lign;
 };
 
-struct LinkedList* create_new_linenumbers(int line_number);
+struct LinkedList* create_new_linenumbers(int lineNumber);
 
 #endif

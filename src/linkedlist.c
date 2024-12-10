@@ -27,7 +27,7 @@ void free_structs(struct LinkedList* linkedList){
     }
 }
 
-void* linkedlist_search(struct LinkedList* data, int (*filter)(void* data, void* type), void* type){
+void* linked_list_search(struct LinkedList* data, int (*filter)(void* data, void* type), void* type){
     struct LinkedList* current = data;
     while (current != NULL){
         if(filter(current->data, type)){

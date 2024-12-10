@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "filters.h"
 #include "include/file.h"
 #include "include/word.h"
 #include "include/search.h"
@@ -17,7 +18,7 @@ int main(int argc, char const *argv[])
         struct LinkedList* wordList = NULL;
         if (read_file(safe_files[i], &wordList) == 0) {
             //printWords(wordList);
-            search_exact_word(wordList, "Bonjour");
+            search_case_insensitive(wordList, "Bonjour");
             search_case_insensitive(wordList, "bonjour");
         }
         free_structs(wordList);

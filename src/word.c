@@ -23,7 +23,7 @@ struct LinkedList* create_word(const char* word, int line_number,const char* fil
 	return new_ll;
 }
 
-int checkIfWordExist(struct LinkedList* wordList, const char* word){
+int check_if_word_exist(struct LinkedList* wordList, const char* word){
 	struct LinkedList* current = wordList;
 	while (current != NULL){
 		struct Word* current_word = (struct Word*) current->data;
@@ -66,27 +66,6 @@ void add_word(struct LinkedList** wordList, const char* word, int line_number,co
 	struct LinkedList* new_word = create_word(word, line_number,fileName);
 	new_word->next = *wordList;
 	*wordList = new_word;
-}
-
-void search_word(struct LinkedList* linkedList, const char* word, int casesensitive) {
-    while (linkedList != NULL) {
-        struct Word* wordList = (struct Word*) linkedList->data;
-        if ((casesensitive == 0 && strcasecmp(wordList->word, word) == 0) || 
-            (casesensitive == 1 && strcmp(wordList->word, word) == 0)) {
-            printf("Mot trouve dans le fichier : %s\n", wordList->word);
-            printf("Occurence %d\n", wordList->count);
-            printf("Lignes : \n");
-            struct LinkedList* line = wordList->line_numbers;
-            while (line != NULL) {
-                struct LineNumbers* current_line = (struct LineNumbers*) line->data;
-                printf("L%d (%d fois)\n", current_line->index, current_line->count_per_lign);
-                line = line->next;
-            }
-            return;
-        }
-        linkedList = linkedList->next;
-    }
-    printf("Mot non trouve: %s\n", word);
 }
 
 void print_words(struct LinkedList* linkedList) {
