@@ -6,14 +6,14 @@
 #include "string.h"
 #include <strings.h>
 
-struct LinkedList* createWord(const char* word, int line_number){
+struct LinkedList* createWord(const char* word, int line_number,const char* fileName){
 	struct Word* new_word = (struct Word*)malloc(sizeof(struct Word));
 	if (word == NULL ){
 		printf("Pas de mot en variable.");
 	}
 	new_word->word = strdup(word);
 	new_word->count = 1;
-
+	new_word->fileName = fileName;
 	if (line_number == 0) {
 		printf("Nombre nul trouve.");
 	}
@@ -37,7 +37,7 @@ int checkIfWordExist(struct LinkedList* wordList, const char* word){
 }
 
 
-void addWord(struct LinkedList** wordList, const char* word, int line_number) {
+void addWord(struct LinkedList** wordList, const char* word, int line_number,const char* fileName) {
 	struct LinkedList* current = *wordList;
 	while (current != NULL) {
 		struct Word* current_word = (struct Word*)current->data;
@@ -63,7 +63,7 @@ void addWord(struct LinkedList** wordList, const char* word, int line_number) {
 		current = current->next;
 	}
 
-	struct LinkedList* new_word = createWord(word, line_number);
+	struct LinkedList* new_word = createWord(word, line_number,fileName);
 	new_word->next = *wordList;
 	*wordList = new_word;
 }
@@ -99,6 +99,7 @@ void printWords(struct LinkedList* linkedList) {
 		while (line != NULL) {
 			struct LineNumbers* current_line = (struct LineNumbers*) line->data;
 			printf("L%d (%d fois) ", current_line->index, current_line->count_per_lign);
+			printf("Fichier : %s",wordList->fileName);
 			line = line->next;
 		}
 		printf("\n");

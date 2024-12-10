@@ -8,13 +8,6 @@
 
 #define READ_LIMIT 300
 
-struct LinkedList* createFile(char* fileName){
-    struct LinkedList* new_ll = (struct LinkedList*)malloc(sizeof(struct LinkedList));
-    new_ll->next = NULL;
-    new_ll->data = fileName;
-    return new_ll;
-}
-
 int readFile(char* fileName, struct LinkedList** wordList) {
     FILE *file;
     char* state;
@@ -31,7 +24,7 @@ int readFile(char* fileName, struct LinkedList** wordList) {
         token = strtok_r(stored_file," ", &state);
         while (token != NULL) {
             token[strcspn(token, "\n")] = 0;
-            addWord(wordList, token, line_number);
+            addWord(wordList, token, line_number,fileName);
             token = strtok_r(NULL," ", &state);
         }
         line_number++;

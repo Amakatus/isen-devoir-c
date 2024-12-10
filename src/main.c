@@ -17,6 +17,7 @@ int main(int argc, char const *argv[])
         if (readFile(safe_files[i], &wordList) == 0) {
             //printWords(wordList);
             searchExactWord(wordList, "Bonjour");
+            searchCaseInsensitive(wordList, "bonjour");
         }
         freeStructs(wordList);
     }
