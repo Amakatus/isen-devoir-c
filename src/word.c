@@ -6,7 +6,7 @@
 #include "string.h"
 #include <strings.h>
 
-struct LinkedList* createWord(const char* word, int line_number,const char* fileName){
+struct LinkedList* create_word(const char* word, int line_number,const char* fileName){
 	struct Word* new_word = (struct Word*)malloc(sizeof(struct Word));
 	if (word == NULL ){
 		printf("Pas de mot en variable.");
@@ -18,8 +18,8 @@ struct LinkedList* createWord(const char* word, int line_number,const char* file
 		printf("Nombre nul trouve.");
 	}
 
-	new_word->line_numbers = createNewLineNumbers(line_number);
-	struct LinkedList* new_ll = newLinkedList(new_word);
+	new_word->line_numbers = create_new_linenumbers(line_number);
+	struct LinkedList* new_ll = new_linked_list(new_word);
 	return new_ll;
 }
 
@@ -37,7 +37,7 @@ int checkIfWordExist(struct LinkedList* wordList, const char* word){
 }
 
 
-void addWord(struct LinkedList** wordList, const char* word, int line_number,const char* fileName) {
+void add_word(struct LinkedList** wordList, const char* word, int line_number,const char* fileName) {
 	struct LinkedList* current = *wordList;
 	while (current != NULL) {
 		struct Word* current_word = (struct Word*)current->data;
@@ -53,7 +53,7 @@ void addWord(struct LinkedList** wordList, const char* word, int line_number,con
 				}
 				line = line->next;
 			}
-			struct LinkedList* new_line = createNewLineNumbers(line_number);
+			struct LinkedList* new_line = create_new_linenumbers(line_number);
 			new_line->next = current_word->line_numbers;
 			current_word->line_numbers = new_line;
 			current_word->count++;
@@ -63,12 +63,12 @@ void addWord(struct LinkedList** wordList, const char* word, int line_number,con
 		current = current->next;
 	}
 
-	struct LinkedList* new_word = createWord(word, line_number,fileName);
+	struct LinkedList* new_word = create_word(word, line_number,fileName);
 	new_word->next = *wordList;
 	*wordList = new_word;
 }
 
-void searchWord(struct LinkedList* linkedList, const char* word, int casesensitive) {
+void search_word(struct LinkedList* linkedList, const char* word, int casesensitive) {
     while (linkedList != NULL) {
         struct Word* wordList = (struct Word*) linkedList->data;
         if ((casesensitive == 0 && strcasecmp(wordList->word, word) == 0) || 
@@ -89,7 +89,7 @@ void searchWord(struct LinkedList* linkedList, const char* word, int casesensiti
     printf("Mot non trouve: %s\n", word);
 }
 
-void printWords(struct LinkedList* linkedList) {
+void print_words(struct LinkedList* linkedList) {
 	while (linkedList != NULL) {
 		struct Word* wordList = (struct Word*) linkedList->data;
 		printf("Mot : %s\n", wordList->word);

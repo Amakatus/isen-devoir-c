@@ -8,7 +8,7 @@
 
 #define READ_LIMIT 300
 
-int readFile(char* fileName, struct LinkedList** wordList) {
+int read_file(char* fileName, struct LinkedList** wordList) {
     FILE *file;
     char* state;
     char* token;
@@ -24,7 +24,7 @@ int readFile(char* fileName, struct LinkedList** wordList) {
         token = strtok_r(stored_file," ", &state);
         while (token != NULL) {
             token[strcspn(token, "\n")] = 0;
-            addWord(wordList, token, line_number,fileName);
+            add_word(wordList, token, line_number,fileName);
             token = strtok_r(NULL," ", &state);
         }
         line_number++;
@@ -34,7 +34,7 @@ int readFile(char* fileName, struct LinkedList** wordList) {
     return 0;
 }
 
-void sendSafeFile(const char *argv[], char* safe_file[], int* safe_file_count) {
+void send_safe_file(const char *argv[], char* safe_file[], int* safe_file_count) {
     DIR *dir;
     struct dirent *dent;
     FILE *file;

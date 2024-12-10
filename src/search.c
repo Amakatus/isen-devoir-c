@@ -6,8 +6,8 @@
 #include <stdio.h>
 
 
-void searchExactWord(struct LinkedList* wordList, const char* word){
-    struct Word* result = (struct Word*)LinkedListSearch(wordList, exactMatch, (void *)word);
+void search_exact_word(struct LinkedList* wordList, const char* word){
+    struct Word* result = (struct Word*)linked_list_search(wordList, exact_match, (void *)word);
     if (result != NULL){
         printf("Mot trouve : %s \nDans le fichier : %s\n", result->word,result->fileName);
         printf("Occurence %d\n", result->count);
@@ -23,8 +23,8 @@ void searchExactWord(struct LinkedList* wordList, const char* word){
     }
 }
 
-void searchCaseInsensitive(struct LinkedList* wordList, const char* word){
-    struct Word* result = (struct Word*)LinkedListSearch(wordList, caseInsensitiveMatch,(void*) word);
+void search_case_insensitive(struct LinkedList* wordList, const char* word){
+    struct Word* result = (struct Word*)linked_list_search(wordList, case_insensitive_match,(void*) word);
         if (result != NULL){
         printf("Mot trouve : %s \nDans le fichier : %s\n", result->word,result->fileName);
         printf("Occurence %d\n", result->count);

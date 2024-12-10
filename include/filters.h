@@ -1,8 +1,8 @@
 #ifndef FILTERS_H
 #define FILTERS_H
 
-int exactMatch(void* data, void* type);
-int caseInsensitiveMatch(void* data, void* type);
-int wildcardMatch(void* data, void* type);
+int exact_match(void* data, void* type);
+int case_insensitive_match(void* data, void* type);
+int wildcard_match(void* data, void* type);
 
 #endif

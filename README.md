@@ -9,9 +9,9 @@ réduire les fonctions
 dOxygen se renseigner
 revoir la gestion des erreurs du token extrait
 Rechercher un mot partiel (* ajout des wildcards)
-Renvoyer la ligne complète ou le mot est envoyé
+Renvoyer le fichier fait
 Ajout d'un menu interactif Raylib RayGUI
 Permettre la recherche de plusieurs mots strict ou avec un OU.
-Plusieurs fichiers en parametres
-Indexation fait
+Plusieurs fichiers en parametres fait
+Indexation
 Fichier header / séparée fait

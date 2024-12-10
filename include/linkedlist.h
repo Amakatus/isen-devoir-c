@@ -6,8 +6,8 @@ struct LinkedList{
     void* data;
 };
 
-struct LinkedList* newLinkedList(void* data);
-void* LinkedListSearch(struct LinkedList* data, int (*filter)(void* data, void* type), void* type);
-void freeStructs(struct LinkedList* linkedList);
+struct LinkedList* new_linked_list(void* data);
+void* linked_list_search(struct LinkedList* data, int (*filter)(void* data, void* type), void* type);
+void free_structs(struct LinkedList* linkedList);
 
 #endif

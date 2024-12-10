@@ -3,14 +3,14 @@
 #include "include/linkedlist.h"
 #include "include/word.h"
 
-struct LinkedList* newLinkedList(void* data){
+struct LinkedList* new_linked_list(void* data){
     struct LinkedList* new_ll = (struct LinkedList*)malloc(sizeof(struct LinkedList));
     new_ll->next = NULL;
     new_ll->data = data;
     return new_ll;
 }
 
-void freeStructs(struct LinkedList* linkedList){
+void free_structs(struct LinkedList* linkedList){
     while(linkedList != NULL){
         struct Word* wordList = (struct Word*) linkedList->data;
         struct LinkedList* lines = wordList->line_numbers;
@@ -27,7 +27,7 @@ void freeStructs(struct LinkedList* linkedList){
     }
 }
 
-void* LinkedListSearch(struct LinkedList* data, int (*filter)(void* data, void* type), void* type){
+void* linkedlist_search(struct LinkedList* data, int (*filter)(void* data, void* type), void* type){
     struct LinkedList* current = data;
     while (current != NULL){
         if(filter(current->data, type)){
