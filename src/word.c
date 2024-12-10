@@ -6,28 +6,28 @@
 #include "string.h"
 #include <strings.h>
 
-struct LinkedList* create_word(const char* word, int line_number,const char* fileName){
-	struct Word* new_word = (struct Word*)malloc(sizeof(struct Word));
+struct LinkedList* create_word(const char* word, int lineNumber,const char* fileName){
+	struct Word* newWord = (struct Word*)malloc(sizeof(struct Word));
 	if (word == NULL ){
 		printf("Pas de mot en variable.");
 	}
-	new_word->word = strdup(word);
-	new_word->count = 1;
-	new_word->fileName = fileName;
-	if (line_number == 0) {
+	newWord->word = strdup(word);
+	newWord->count = 1;
+	newWord->fileName = fileName;
+	if (lineNumber == 0) {
 		printf("Nombre nul trouve.");
 	}
 
-	new_word->line_numbers = create_new_linenumbers(line_number);
-	struct LinkedList* new_ll = new_linked_list(new_word);
-	return new_ll;
+	newWord->lineNumbers = create_new_linenumbers(lineNumber);
+	struct LinkedList* newLinkedList = new_linked_list(newWord);
+	return newLinkedList;
 }
 
 int check_if_word_exist(struct LinkedList* wordList, const char* word){
 	struct LinkedList* current = wordList;
 	while (current != NULL){
-		struct Word* current_word = (struct Word*) current->data;
-		if(strcmp(word,current_word->word) == 0){
+		struct Word* currentWord = (struct Word*) current->data;
+		if(strcmp(word,currentWord->word) == 0){
 			printf("Le mot existe deja");
 			return 1;
 		}
@@ -37,35 +37,35 @@ int check_if_word_exist(struct LinkedList* wordList, const char* word){
 }
 
 
-void add_word(struct LinkedList** wordList, const char* word, int line_number,const char* fileName) {
+void add_word(struct LinkedList** wordList, const char* word, int lineNumber,const char* fileName) {
 	struct LinkedList* current = *wordList;
 	while (current != NULL) {
-		struct Word* current_word = (struct Word*)current->data;
+		struct Word* currentWord = (struct Word*)current->data;
 
-		if (strcmp(current_word->word, word) == 0) {
-			struct LinkedList* line = current_word->line_numbers;
-			while (line != NULL) {
-				struct LineNumbers* line_numbers = (struct LineNumbers*)line->data;
-				if (line_numbers->index == line_number) {
-					line_numbers->count_per_lign++;
-					current_word->count++;
+		if (strcmp(currentWord->word, word) == 0) {
+			struct LinkedList* currentLine = currentWord->lineNumbers;
+			while (currentLine != NULL) {
+				struct LineNumbers* lineNumbers = (struct LineNumbers*)currentLine->data;
+				if (lineNumbers->index == lineNumber) {
+					lineNumbers->countPerLign++;
+					currentWord->count++;
 					return;
 				}
-				line = line->next;
+				currentLine = currentLine->next;
 			}
-			struct LinkedList* new_line = create_new_linenumbers(line_number);
-			new_line->next = current_word->line_numbers;
-			current_word->line_numbers = new_line;
-			current_word->count++;
+			struct LinkedList* newLine = create_new_linenumbers(lineNumber);
+			newLine->next = currentWord->lineNumbers;
+			currentWord->lineNumbers = newLine;
+			currentWord->count++;
 			return;
 		}
 
 		current = current->next;
 	}
 
-	struct LinkedList* new_word = create_word(word, line_number,fileName);
-	new_word->next = *wordList;
-	*wordList = new_word;
+	struct LinkedList* newWord = create_word(word, lineNumber,fileName);
+	newWord->next = *wordList;
+	*wordList = newWord;
 }
 
 void print_words(struct LinkedList* linkedList) {
@@ -74,10 +74,10 @@ void print_words(struct LinkedList* linkedList) {
 		printf("Mot : %s\n", wordList->word);
 		printf("Occurrence : %d\n", wordList->count);
 		printf("Lignes : ");
-		struct LinkedList* line = wordList->line_numbers;
+		struct LinkedList* line = wordList->lineNumbers;
 		while (line != NULL) {
-			struct LineNumbers* current_line = (struct LineNumbers*) line->data;
-			printf("L%d (%d fois) ", current_line->index, current_line->count_per_lign);
+			struct LineNumbers* currentLine = (struct LineNumbers*) line->data;
+			printf("L%d (%d fois) ", currentLine->index, currentLine->countPerLign);
 			printf("Fichier : %s",wordList->fileName);
 			line = line->next;
 		}

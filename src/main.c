@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "filters.h"
 #include "include/file.h"
 #include "include/word.h"
 #include "include/search.h"
@@ -10,13 +9,13 @@
 
 int main(int argc, char const *argv[])
 {
-    char* safe_files[MAX_FILES];
-    int safe_file_count = 0;
-    send_safe_file(argv, safe_files, &safe_file_count);
-    for (int i = 0; i < safe_file_count; i++) {
+    char* safeFiles[MAX_FILES];
+    int safeFileCount = 0;
+    send_safe_file(argv, safeFiles, &safeFileCount);
+    for (int i = 0; i < safeFileCount; i++) {
         printf("\n------------NOUVEAU FICHIER-----------\n\n");
         struct LinkedList* wordList = NULL;
-        if (read_file(safe_files[i], &wordList) == 0) {
+        if (read_file(safeFiles[i], &wordList) == 0) {
             //printWords(wordList);
             search_case_insensitive(wordList, "Bonjour");
             search_case_insensitive(wordList, "bonjour");

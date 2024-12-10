@@ -6,8 +6,7 @@ struct LinkedList;
 struct Word {
     char* word;
     const char* fileName;
-    struct LinkedList* files;
-    struct LinkedList* line_numbers;
+    struct LinkedList* lineNumbers;
     int count;
 };
 

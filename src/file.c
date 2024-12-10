@@ -12,22 +12,22 @@ int read_file(char* fileName, struct LinkedList** wordList) {
     FILE *file;
     char* state;
     char* token;
-    char stored_file[READ_LIMIT];
+    char storedFile[READ_LIMIT];
     file = fopen(fileName, "r");
     if (file == NULL) {
         printf("Erreur à l'ouverture du fichier");
         return 1;
     }
-    int line_number = 1;
+    int lineNumber = 1;
     printf("Ouverture du fichier...\n");
-    while (fgets(stored_file, READ_LIMIT, file) != NULL) {
-        token = strtok_r(stored_file," ", &state);
+    while (fgets(storedFile, READ_LIMIT, file) != NULL) {
+        token = strtok_r(storedFile," ", &state);
         while (token != NULL) {
             token[strcspn(token, "\n")] = 0;
-            add_word(wordList, token, line_number,fileName);
+            add_word(wordList, token, lineNumber,fileName);
             token = strtok_r(NULL," ", &state);
         }
-        line_number++;
+        lineNumber++;
     }
 
     fclose(file);
@@ -38,8 +38,8 @@ void send_safe_file(const char *argv[], char* safeFiles[], int* safeFileCount) {
     DIR *dir;
     struct dirent *dent;
     FILE *file;
-    char stored_file[READ_LIMIT];
-    char file_path[READ_LIMIT];
+    char storedFile[READ_LIMIT];
+    char filePath[READ_LIMIT];
     int i;
     dir = opendir(argv[1]);
     if (dir != NULL) {
@@ -48,17 +48,17 @@ void send_safe_file(const char *argv[], char* safeFiles[], int* safeFileCount) {
                 continue;
             }
             
-            snprintf(file_path, READ_LIMIT, "%s/%s", argv[1], dent->d_name);
-            file = fopen(file_path, "r");
+            snprintf(filePath, READ_LIMIT, "%s/%s", argv[1], dent->d_name);
+            file = fopen(filePath, "r");
             if (file == NULL) {
                 continue;
             }
 
             int count = 1;
-            while (fgets(stored_file, READ_LIMIT, file) != NULL) {
+            while (fgets(storedFile, READ_LIMIT, file) != NULL) {
                 i = 0;
-                while (i < READ_LIMIT && stored_file[i] != '\0') {
-                    if ((stored_file[i] < 32 || stored_file[i] > 122) && stored_file[i] != '\n') {
+                while (i < READ_LIMIT && storedFile[i] != '\0') {
+                    if ((storedFile[i] < 32 || storedFile[i] > 122) && storedFile[i] != '\n') {
                         count++;
                         break;
                     }
@@ -69,7 +69,7 @@ void send_safe_file(const char *argv[], char* safeFiles[], int* safeFileCount) {
 
             if (count < 30) {
                 printf("Le fichier %s est valide\n", dent->d_name);
-                safeFiles[*safeFileCount] = strdup(file_path);
+                safeFiles[*safeFileCount] = strdup(filePath);
                 (*safeFileCount)++;
             } else {
                 printf("Le fichier %s est invalide\n", dent->d_name);

@@ -13,7 +13,7 @@ struct LinkedList* new_linked_list(void* data){
 void free_structs(struct LinkedList* linkedList){
     while(linkedList != NULL){
         struct Word* wordList = (struct Word*) linkedList->data;
-        struct LinkedList* lines = wordList->line_numbers;
+        struct LinkedList* lines = wordList->lineNumbers;
         while(lines != NULL){
             struct LineNumbers* current_line = (struct LineNumbers*) lines->data;
             free(current_line);

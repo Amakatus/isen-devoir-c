@@ -9,7 +9,7 @@ struct LinkedList* create_new_linenumbers(int lineNumber){
     }
     struct LineNumbers* new_line_numbers = (struct LineNumbers*)malloc(sizeof(struct LineNumbers));
     new_line_numbers->index = lineNumber;
-    new_line_numbers->count_per_lign = 1;
+    new_line_numbers->countPerLign = 1;
     struct LinkedList* new_ll = new_linked_list(new_line_numbers);
     return new_ll;
 }
