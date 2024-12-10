@@ -4,10 +4,10 @@
 #include "include/word.h"
 
 struct LinkedList* new_linked_list(void* data){
-    struct LinkedList* new_ll = (struct LinkedList*)malloc(sizeof(struct LinkedList));
-    new_ll->next = NULL;
-    new_ll->data = data;
-    return new_ll;
+    struct LinkedList* newLinkedList = (struct LinkedList*)malloc(sizeof(struct LinkedList));
+    newLinkedList->next = NULL;
+    newLinkedList->data = data;
+    return newLinkedList;
 }
 
 void free_structs(struct LinkedList* linkedList){
@@ -15,8 +15,8 @@ void free_structs(struct LinkedList* linkedList){
         struct Word* wordList = (struct Word*) linkedList->data;
         struct LinkedList* lines = wordList->lineNumbers;
         while(lines != NULL){
-            struct LineNumbers* current_line = (struct LineNumbers*) lines->data;
-            free(current_line);
+            struct LineNumbers* currentLine = (struct LineNumbers*) lines->data;
+            free(currentLine);
             lines = lines->next;
         }
         free(wordList->word);

@@ -43,15 +43,15 @@ void add_word(struct LinkedList** wordList, const char* word, int lineNumber,con
 		struct Word* currentWord = (struct Word*)current->data;
 
 		if (strcmp(currentWord->word, word) == 0) {
-			struct LinkedList* currentLine = currentWord->lineNumbers;
-			while (currentLine != NULL) {
-				struct LineNumbers* lineNumbers = (struct LineNumbers*)currentLine->data;
+			struct LinkedList* lines = currentWord->lineNumbers;
+			while (lines != NULL) {
+				struct LineNumbers* lineNumbers = (struct LineNumbers*)lines->data;
 				if (lineNumbers->index == lineNumber) {
 					lineNumbers->countPerLign++;
 					currentWord->count++;
 					return;
 				}
-				currentLine = currentLine->next;
+				lines = lines->next;
 			}
 			struct LinkedList* newLine = create_new_linenumbers(lineNumber);
 			newLine->next = currentWord->lineNumbers;
@@ -74,12 +74,12 @@ void print_words(struct LinkedList* linkedList) {
 		printf("Mot : %s\n", wordList->word);
 		printf("Occurrence : %d\n", wordList->count);
 		printf("Lignes : ");
-		struct LinkedList* line = wordList->lineNumbers;
-		while (line != NULL) {
-			struct LineNumbers* currentLine = (struct LineNumbers*) line->data;
+		struct LinkedList* lines = wordList->lineNumbers;
+		while (lines != NULL) {
+			struct LineNumbers* currentLine = (struct LineNumbers*) lines->data;
 			printf("L%d (%d fois) ", currentLine->index, currentLine->countPerLign);
 			printf("Fichier : %s",wordList->fileName);
-			line = line->next;
+			lines = lines->next;
 		}
 		printf("\n");
 		linkedList = linkedList->next;

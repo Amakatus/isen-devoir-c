@@ -11,11 +11,11 @@ void print_search_match(struct LinkedList* linkedList){
     printf("Mot trouve : %s \nDans le fichier : %s\n", wordList->word,wordList->fileName);
     printf("Occurence %d\n", wordList->count);
     printf("Lignes : \n");
-    struct LinkedList* lineNumbers = wordList->lineNumbers;
-    while (lineNumbers != NULL) {
-        struct LineNumbers* currentLine = (struct LineNumbers*) lineNumbers->data;
+    struct LinkedList* lines = wordList->lineNumbers;
+    while (lines != NULL) {
+        struct LineNumbers* currentLine = (struct LineNumbers*) lines->data;
         printf("L%d (%d fois)\n", currentLine->index, currentLine->countPerLign);
-        lineNumbers = lineNumbers->next;
+        lines = lines->next;
     }
 }
 
