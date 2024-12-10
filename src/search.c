@@ -16,7 +16,6 @@ void searchExactWord(struct LinkedList* wordList, const char* word){
         while (line != NULL) {
             struct LineNumbers* current_line = (struct LineNumbers*) line->data;
             printf("L%d (%d fois)\n", current_line->index, current_line->count_per_lign);
-            printf("Fichier : %s",result->fileName);
             line = line->next;
         }
     } else {
