@@ -1,6 +1,6 @@
 #ifndef READFILE_H
 #define READFILE_H
-#include "include/linkedlist.h"
+#include "linkedlist.h"
 
 
 int read_file(char* fileName, struct LinkedList** wordList);

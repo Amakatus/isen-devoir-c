@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/linkedlist.h"
-#include "include/word.h"
+#include "linkedlist.h"
+#include "word.h"
 
 struct LinkedList* new_linked_list(void* data){
     struct LinkedList* newLinkedList = (struct LinkedList*)malloc(sizeof(struct LinkedList));
@@ -10,6 +10,12 @@ struct LinkedList* new_linked_list(void* data){
     return newLinkedList;
 }
 
+
+/**
+ * @brief 
+ * 
+ * @param linkedList 
+ */
 void free_structs(struct LinkedList* linkedList){
     while(linkedList != NULL){
         struct Word* wordList = (struct Word*) linkedList->data;

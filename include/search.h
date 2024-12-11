@@ -1,6 +1,6 @@
 #ifndef SEARCH_H
 #define SEARCH_H
-#include "include/linkedlist.h"
+#include "linkedlist.h"
 #include "word.h"
 
 void print_search_match(struct LinkedList* linkedList);

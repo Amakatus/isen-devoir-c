@@ -1,8 +1,8 @@
 #include "filters.h"
-#include "include/linkedlist.h"
-#include "include/search.h"
-#include "include/word.h"
-#include "include/linenumbers.h"
+#include "linkedlist.h"
+#include "search.h"
+#include "word.h"
+#include "linenumbers.h"
 #include <stdio.h>
 
 

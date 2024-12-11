@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "include/linenumbers.h"
+#include "linenumbers.h"
 #include <stdlib.h>
-#include <include/linkedlist.h>
+#include <linkedlist.h>
 
 struct LinkedList* create_new_linenumbers(int lineNumber){
     if(lineNumber <= 0){

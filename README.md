@@ -6,14 +6,15 @@ TODO :
 
 attention au nommage / écriture (->)
 Readme Propre
-CamelCase fait 
 réduire les fonctions 
 dOxygen se renseigner
 revoir la gestion des erreurs du token extrait
-Rechercher un mot partiel (* ajout des wildcards)
 Renvoyer le fichier fait
-Ajout d'un menu interactif Raylib RayGUI
-Permettre la recherche de plusieurs mots strict ou avec un OU.
+Ajout d'un menu interactif Raylib RayGUI 
+Rechercher un mot partiel (* ajout des wildcards)
+Permettre la recherche de plusieurs mots strict et avec un OU.
 Plusieurs fichiers en parametres fait
 Indexation
 Fichier header / séparée fait
+Rotation polonaise inverse
+strstr

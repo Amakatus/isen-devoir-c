@@ -1,5 +1,5 @@
-#include "include/file.h"
-#include "include/word.h"
+#include "file.h"
+#include "word.h"
 #include "linkedlist.h"
 #include "stdio.h"
 #include <stdlib.h>
@@ -47,13 +47,11 @@ void send_safe_file(const char *argv[], char* safeFiles[], int* safeFileCount) {
             if (strcmp(dent->d_name, ".") == 0 || strcmp(dent->d_name, "..") == 0 || dent->d_name[0] == '.') {
                 continue;
             }
-            
             snprintf(filePath, READ_LIMIT, "%s/%s", argv[1], dent->d_name);
             file = fopen(filePath, "r");
             if (file == NULL) {
                 continue;
             }
-
             int count = 1;
             while (fgets(storedFile, READ_LIMIT, file) != NULL) {
                 i = 0;
@@ -66,7 +64,6 @@ void send_safe_file(const char *argv[], char* safeFiles[], int* safeFileCount) {
                 }
                 if (count >= 30) break;
             }
-
             if (count < 30) {
                 printf("Le fichier %s est valide\n", dent->d_name);
                 safeFiles[*safeFileCount] = strdup(filePath);

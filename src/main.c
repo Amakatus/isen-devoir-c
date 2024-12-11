@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "include/file.h"
-#include "include/word.h"
-#include "include/search.h"
+#include "file.h"
+#include "word.h"
+#include "search.h"
 #include "linkedlist.h"
 
 #define MAX_FILES 40
