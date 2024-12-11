@@ -4,9 +4,9 @@ Mon projet de C est un moteur de recherche plein texte qui permets de rechercher
 TODO : 
 
 
-attention au nommage / écriture (->)
+attention au nommage / écriture (->) 
 Readme Propre
-réduire les fonctions 
+réduire les fonctions
 dOxygen se renseigner
 revoir la gestion des erreurs du token extrait
 Renvoyer le fichier fait
@@ -17,4 +17,4 @@ Plusieurs fichiers en parametres fait
 Indexation
 Fichier header / séparée fait
 Rotation polonaise inverse
-strstr
+strstr 
