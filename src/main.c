@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
         struct LinkedList* wordList = NULL;
         if (read_file(safeFiles[i], &wordList) == 0) {
             //printWords(wordList);
-            search_wildcard(wordList,"Bon*");
+            search_wildcard(wordList,"*Bon");
         }
         free_structs(wordList);
     }
