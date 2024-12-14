@@ -6,6 +6,14 @@
 #include "string.h"
 #include <strings.h>
 
+/**
+ * @brief Create a word object
+ * 
+ * @param word 
+ * @param lineNumber 
+ * @param fileName 
+ * @return struct LinkedList* 
+ */
 struct LinkedList* create_word(const char* word, int lineNumber,const char* fileName){
 	struct Word* newWord = (struct Word*)malloc(sizeof(struct Word));
 	if (word == NULL ){
@@ -23,6 +31,13 @@ struct LinkedList* create_word(const char* word, int lineNumber,const char* file
 	return newLinkedList;
 }
 
+/**
+ * @brief 
+ * 
+ * @param wordList 
+ * @param word 
+ * @return int 
+ */
 int check_if_word_exist(struct LinkedList* wordList, const char* word){
 	struct LinkedList* current = wordList;
 	while (current != NULL){
@@ -36,7 +51,14 @@ int check_if_word_exist(struct LinkedList* wordList, const char* word){
 	return 0;
 }
 
-
+/**
+ * @brief 
+ * 
+ * @param wordList 
+ * @param word 
+ * @param lineNumber 
+ * @param fileName 
+ */
 void add_word(struct LinkedList** wordList, const char* word, int lineNumber,const char* fileName) {
 	struct LinkedList* current = *wordList;
 	while (current != NULL) {
@@ -68,6 +90,11 @@ void add_word(struct LinkedList** wordList, const char* word, int lineNumber,con
 	*wordList = newWord;
 }
 
+/**
+ * @brief 
+ * 
+ * @param linkedList 
+ */
 void print_words(struct LinkedList* linkedList) {
 	while (linkedList != NULL) {
 		struct Word* wordList = (struct Word*) linkedList->data;
