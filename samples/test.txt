@@ -4,3 +4,6 @@ Programme C
 Bonjour le monde
 Ceci est un test
 Cacahuete
+Boudin
+Bradoui
+Bonjiu
