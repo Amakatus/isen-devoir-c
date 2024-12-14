@@ -19,6 +19,7 @@ int main(int argc, char const *argv[])
             //printWords(wordList);
             search_case_insensitive(wordList, "Bonjour");
             search_case_insensitive(wordList, "bonjour");
+            search_wildcard(wordList,"Bon*");
         }
         free_structs(wordList);
     }
