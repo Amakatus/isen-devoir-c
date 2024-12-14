@@ -10,13 +10,13 @@ int check_if_wildcard(void* type){
     if (searchWord == NULL || strlen(searchWord) == 0) {
         return -1;
     }
+    if (searchWord[0] == '*' && searchWord[strlen(searchWord) - 1] == '*') {
+        return 2;
+    }
     if(searchWord[0] == '*'){
         return 0;
     } if (searchWord[strlen(searchWord) - 1] == '*'){
         return 1;
-    }
-    if (searchWord[0] == '*' && searchWord[strlen(searchWord) - 1] == '*') {
-        return 2;
     }
     return -1;
 }
@@ -50,9 +50,11 @@ int wildcard_match(void *data, const void *type) {
         return strncmp(word->word, searchWord, strlen(searchWord)) == 0;
     }
     if (check_if_wildcard(searchWord) == 2) {
-        searchWord++;
-        searchWord[strlen(searchWord) - 1] = '\0';
-        return strstr(word->word, searchWord) != NULL;
+        char* tempSearchWord = strdup(++searchWord);
+        tempSearchWord[strlen(tempSearchWord) - 1] = '\0';
+        int result = strstr(word->word, tempSearchWord) != NULL;
+        free(tempSearchWord);
+        return result;
     }
     return -1;
 }
