@@ -11,6 +11,9 @@ int check_if_wildcard(void* type){
     } if (searchWord[strlen(searchWord) - 1] == '*'){
         return 1;
     }
+    if (searchWord[0] == '*' && searchWord[strlen(searchWord) - 1] == '*') {
+        return 2;
+    }
     return -1;
 }
                                                                           
@@ -29,10 +32,20 @@ int case_insensitive_match(void* data, void* type){
 int wildcard_match(void *data, void *type){
     struct Word* word = (struct Word*) data;
     char* searchWord = (char *) type;
-    if(check_if_wildcard(searchWord) != -1){
-        return fnmatch(searchWord, word->word, 0);
+
+    if(check_if_wildcard(searchWord) == 0){
+        searchWord++;
+        return strstr(word->word, searchWord) != NULL;
+    } else if (check_if_wildcard(searchWord) == 1){
+        searchWord[strlen(searchWord) - 1] = '\0';
+        return strstr(word->word,searchWord) != NULL;
+    } else if (check_if_wildcard(searchWord) == 2){
+        searchWord++;
+        searchWord[strlen(searchWord) - 1] = '\0';
+        return strstr(word->word,searchWord) != NULL;
     }
-    return 0;
+
+    return -1;
 }
 
 
