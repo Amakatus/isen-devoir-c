@@ -55,27 +55,9 @@ void search_case_insensitive(struct LinkedList* wordList, const char* word){
  * @param word 
  */
 void search_wildcard(struct LinkedList* wordList, const char* word) {
-    struct LinkedList* results = NULL;
-    struct LinkedList* currentNode = wordList;
+    struct LinkedList* resultNode = (struct LinkedList*) linked_list_search(wordList, wildcard_match, (void *)word);
 
-    while (currentNode != NULL) {
-        struct Word* wordItem = (struct Word*) currentNode->data;
-        if (wildcard_match(wordItem, word)) {
-            struct LinkedList* newNode = new_linked_list(wordItem);
-            if (results == NULL) {
-                results = newNode;
-            } else {
-                struct LinkedList* temp = results;
-                while (temp->next != NULL) {
-                    temp = temp->next;
-                }
-                temp->next = newNode;
-            }
-        }
-        currentNode = currentNode->next;
-    }
-    if (results != NULL) {
-        struct LinkedList* resultNode = results;
+    if (resultNode != NULL) {
         while (resultNode != NULL) {
             print_search_match(resultNode);
             resultNode = resultNode->next;

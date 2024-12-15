@@ -40,24 +40,20 @@ int main(int argc, char* argv[]) {
                 printf("------------------------------------------------------\n");
                 printf("Veuillez choisir une option (1-4): ");
                 int option;
-                char* word = malloc(sizeof(char)*300);
                 scanf("%d", &option);
+                char* word = malloc(sizeof(char)*300);
+                printf("Veuillez entrer le mot cherche :\n");
+                scanf("%s", word);
                 switch (option) {
                     case 1:
-                        printf("Veuillez entrer le mot cherche :\n");
-                        scanf("%s", word);
                         search_exact_word(wordList,word);
                         free(word);
                         break;
                     case 2:
-                        printf("Veuillez entrer le mot cherche :\n");
-                        scanf("%s", word);                        
                         search_case_insensitive(wordList,word);
                         free(word);                        
                         break;
                     case 3:
-                        printf("Veuillez entrer le mot cherche :\n");
-                        scanf("%s", word);
                         search_wildcard(wordList,word);
                         free(word);
                         break;
