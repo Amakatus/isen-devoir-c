@@ -5,7 +5,11 @@
 #include "linenumbers.h"
 #include <stdio.h>
 
-
+/**
+ * @brief 
+ * 
+ * @param linkedList 
+ */
 void print_search_match(struct LinkedList* linkedList) {
     struct Word* wordList = (struct Word*) linkedList->data;
     printf("Mot trouvé : %s \nDans le fichier : %s\n", wordList->word, wordList->fileName);
@@ -20,8 +24,13 @@ void print_search_match(struct LinkedList* linkedList) {
     }
 }
 
-
-void search_exact_word(struct LinkedList* wordList, const char* word){
+/**
+ * @brief 
+ * 
+ * @param wordList 
+ * @param word 
+ */
+void search_exact_word(struct LinkedList* wordList, char* word){
     struct Word* result = (struct Word*)linked_list_search(wordList, exact_match, (void *)word);
     if (result != NULL){
             print_search_match((struct LinkedList*) result);
@@ -39,6 +48,12 @@ void search_case_insensitive(struct LinkedList* wordList, const char* word){
     }
 }
 
+/**
+ * @brief 
+ * 
+ * @param wordList 
+ * @param word 
+ */
 void search_wildcard(struct LinkedList* wordList, const char* word) {
     struct LinkedList* results = NULL;
     struct LinkedList* currentNode = wordList;

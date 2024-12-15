@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
                 switch (option) {
                     case 1:
                         printf("Veuillez entrer le mot cherche :\n");
-                        scanf("%s\n", word);
+                        scanf("%s", word);
                         search_exact_word(wordList,word);
                         free(word);
                         break;
