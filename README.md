@@ -1,4 +1,4 @@
-C-search est un projet développé en langage C, permettant de réaliser des recherches dans des fichiers texte en utilisant différentes méthodes de recherche telles que la recherche exacte, la recherche insensible à la casse, et la recherche avec joker. Il a été fait dans le cadre d'un devoir-maison pour le cours d'algorithmie-C.
+C-search est un projet développé en langage C, permettant de réaliser des recherches dans des fichiers texte en utilisant différentes méthodes de recherche telles que la recherche exacte, la recherche insensible à la casse, et la recherche avec joker. Il a été fait dans le cadre d'un devoir-maison pour le cours d'algorithmie-C à rendre le 15 décembre 2024.
 
 **Fonctionnalités principales** :writing_hand:
 
