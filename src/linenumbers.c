@@ -3,6 +3,13 @@
 #include <stdlib.h>
 #include <linkedlist.h>
 
+
+/**
+ * @brief Creer une nouvelle structure de tableau de ligne, qui sert à stocker les occurences de ligne du mot.
+ * 
+ * @param lineNumber 
+ * @return struct LinkedList* 
+ */
 struct LinkedList* create_new_linenumbers(int lineNumber){
     if(lineNumber <= 0){
         perror("ligne inferieure a 0.");

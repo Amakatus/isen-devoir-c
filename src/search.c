@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 /**
- * @brief 
+ * @brief Fonction d'affichage de la recherche , qui affiche le mot ses occurences et le nombre de ligne où il apparait.
  * 
  * @param linkedList 
  */
@@ -32,7 +32,7 @@ void print_search_match(struct Word* wordList) {
 }
 
 /**
- * @brief 
+ * @brief Effectue une recherche exacte pour un mot donné dans une liste chaînée de mots
  * 
  * @param wordList 
  * @param word 
@@ -46,6 +46,13 @@ void search_exact_word(struct LinkedList* wordList, char* word) {
     }
 }
 
+
+/**
+ * @brief Effectue une recherche insensible à la casse pour un mot donné dans une liste chaînée de mots.
+ * 
+ * @param wordList 
+ * @param word 
+ */
 void search_case_insensitive(struct LinkedList* wordList, char* word){
     struct Word* result = (struct Word*)linked_list_search(wordList, case_insensitive_match,(void*) word);
     if (result != NULL){
@@ -55,40 +62,41 @@ void search_case_insensitive(struct LinkedList* wordList, char* word){
     }
 }
 
-
+/**
+ * @brief Effectue une recherche à l'aide de la wildcard *, ne marche pas encore très bien. Surtout pour le cas où la wildcard est à la fin.
+ * 
+ * @param wordList 
+ * @param word 
+ */
 void search_wildcard(struct LinkedList* wordList, char* word) {
     struct LinkedList* results = NULL;
     struct LinkedList* currentNode = wordList;
-    
-    // Parcours de la liste des mots
     while (currentNode != NULL) {
-        struct Word* wordItem = (struct Word*) currentNode->data;  // Récupération du mot
+        struct Word* wordItem = (struct Word*) currentNode->data;
         if (wildcard_match(wordItem, word)) {
-            struct LinkedList* newNode = new_linked_list(wordItem);  // Création d'un nouveau noeud
+            struct LinkedList* newNode = new_linked_list(wordItem);
             if (results == NULL) {
-                results = newNode;  // Si c'est le premier résultat, on l'ajoute comme tête de liste
+                results = newNode;
             } else {
                 struct LinkedList* temp = results;
                 while (temp->next != NULL) {
-                    temp = temp->next;  // Recherche de la fin de la liste
+                    temp = temp->next;
                 }
-                temp->next = newNode;  // Ajout du nouveau noeud à la fin
+                temp->next = newNode;
             }
         }
-        currentNode = currentNode->next;  // Passage au noeud suivant
+        currentNode = currentNode->next;
     }
 
     if (results != NULL) {
         struct LinkedList* resultNode = results;
-        
-        // Parcours de la liste des résultats pour imprimer les correspondances
         while (resultNode != NULL) {
-            struct Word* wordResult = (struct Word*) resultNode->data;  // Cast vers Word*
-            print_search_match(wordResult);  // Affichage du résultat
+            struct Word* wordResult = (struct Word*) resultNode->data;
+            print_search_match(wordResult);
             resultNode = resultNode->next;
         }
     } else {
-        printf("Aucun mot trouvé pour le mot: %s\n", word);  // Si aucun résultat trouvé
+        printf("Aucun mot trouvé pour le mot: %s\n", word);
     }
 }
 

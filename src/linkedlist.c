@@ -3,6 +3,12 @@
 #include "linkedlist.h"
 #include "word.h"
 
+/**
+ * @brief Creer une nouvelle liste chainée.
+ * 
+ * @param data 
+ * @return struct LinkedList* 
+ */
 struct LinkedList* new_linked_list(void* data){
     struct LinkedList* newLinkedList = (struct LinkedList*)malloc(sizeof(struct LinkedList));
     newLinkedList->next = NULL;
@@ -12,7 +18,7 @@ struct LinkedList* new_linked_list(void* data){
 
 
 /**
- * @brief 
+ * @brief Sers à libérer à la fin du traitement la liste chainée et son contenu
  * 
  * @param linkedList 
  */
@@ -33,6 +39,15 @@ void free_structs(struct LinkedList* linkedList){
     }
 }
 
+
+/**
+ * @brief Parcourt une liste chaînée pour rechercher un élément dont les données passent le filtre spécifié. 
+ * 
+ * @param data 
+ * @param filter 
+ * @param type 
+ * @return void* 
+ */
 void* linked_list_search(struct LinkedList* data, int (*filter)(void* data, void* type), void* type){
     struct LinkedList* current = data;
     while (current != NULL){

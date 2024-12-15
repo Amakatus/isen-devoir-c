@@ -7,10 +7,15 @@
 
 
 /**
- * @brief Vérifie si le caractère passé en paramètre contient une * ou non. 
+ * @brief Vérifie si le mot de recherche contient des caractères de type *. Retourne :
+
+    -1 si le mot est vide,
+    0 si le * est au début du mot,
+    1 si le * est à la fin du mot,
+    2 si le * est à la fois au début et à la fin du mot.
  * 
  * @param type 
- * @return un entier, -1 si le mot est vide, 2 si le mot contient une * au début et à la fin. 0 si il en contient au début. 1 si il contient une * à la fin. 
+ * @return int
  */
 int check_if_wildcard(void* type){
     char* searchWord = (char *) type;
@@ -29,7 +34,7 @@ int check_if_wildcard(void* type){
 }
 
 /**
- * @brief Vérifie si le mot passé en paramètre est strictement égal à un mot du texte.
+ * @brief Vérifie si le mot donné correspond exactement au mot recherché, en utilisant une comparaison stricte. Retourne 0 si les mots sont égaux, sinon 1.
  * 
  * @param data 
  * @param type 
@@ -42,7 +47,7 @@ int exact_match(void* data, void* type){
 }
 
 /**
- * @brief Vérifie si le mot passé en paramètre est case-sensitive égal à un mot du texte.
+ * @brief Vérifie si le mot donné correspond au mot recherché sans tenir compte de la casse (insensible à la casse). Retourne 0 si les mots sont égaux, sinon 1.
  
  * 
  * @param data 
@@ -57,7 +62,11 @@ int case_insensitive_match(void* data, void* type){
 }
 
 /**
- * @brief Fonction qui effectue des traitements si 
+ * @brief Vérifie si le mot donné correspond à un mot recherché avec des caractères de type *.
+        Si * est à la fin du mot (ex : Bon*), le mot doit commencer par la chaîne avant le *.
+        Si * est au début du mot (ex : *Bon), le mot doit finir par la chaîne après le *.
+        Si * est à la fois au début et à la fin du mot (ex : *Bon*), le mot peut contenir la chaîne recherchée n'importe où.
+        Retourne 1 si le mot correspond au critère, sinon 0.
  * 
  * @param data 
  * @param type 
