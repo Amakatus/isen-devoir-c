@@ -11,23 +11,25 @@
  * @param linkedList 
  */
 void print_search_match(struct Word* wordList) {
-    if (wordList == NULL) {
+    if (wordList == NULL || wordList->word == NULL || wordList->fileName == NULL) {
         printf("Erreur : mot non trouvé ou invalid.\n");
         return;
     }
 
-    printf("Mot trouvé : %s \nDans le fichier : %s\n", wordList->word, wordList->fileName);
+    printf("Mot trouvé : %s \n", wordList->word ? wordList->word : "NULL");
+    printf("Dans le fichier : %s\n", wordList->fileName ? wordList->fileName : "NULL");
     printf("Occurence %d\n", wordList->count);
     printf("Lignes : \n");
 
     struct LinkedList* lines = wordList->lineNumbers;
     while (lines != NULL) {
         struct LineNumbers* currentLine = (struct LineNumbers*) lines->data;
-        printf("L%d (%d fois)\n", currentLine->index, currentLine->countPerLign);
+        if (currentLine) {
+            printf("L%d (%d fois)\n", currentLine->index, currentLine->countPerLign);
+        }
         lines = lines->next;
     }
 }
-
 
 /**
  * @brief 
@@ -55,30 +57,41 @@ void search_case_insensitive(struct LinkedList* wordList, char* word){
 
 
 void search_wildcard(struct LinkedList* wordList, char* word) {
-    struct LinkedList* resultNode = (struct LinkedList*) linked_list_search(wordList, wildcard_match, (void *)word);
-    if (resultNode != NULL) {
-        struct LinkedList* iterList = resultNode;
-        while (iterList != NULL) {
-            struct Word* wordData = (struct Word*) iterList->data;
-            if (wordData != NULL) {
-                printf("Mot trouvé : %s \nDans le fichier : %s\n", wordData->word, wordData->fileName);
-                printf("Occurence %d\n", wordData->count);
-                printf("Lignes : \n");
-                struct LinkedList* lines = wordData->lineNumbers;
-                while (lines != NULL) {
-                    struct LineNumbers* currentLine = (struct LineNumbers*) lines->data;
-                    printf("L%d (%d fois)\n", currentLine->index, currentLine->countPerLign);
-                    lines = lines->next;
-                }
+    struct LinkedList* results = NULL;
+    struct LinkedList* currentNode = wordList;
+    
+    // Parcours de la liste des mots
+    while (currentNode != NULL) {
+        struct Word* wordItem = (struct Word*) currentNode->data;  // Récupération du mot
+        if (wildcard_match(wordItem, word)) {
+            struct LinkedList* newNode = new_linked_list(wordItem);  // Création d'un nouveau noeud
+            if (results == NULL) {
+                results = newNode;  // Si c'est le premier résultat, on l'ajoute comme tête de liste
             } else {
-                printf("Erreur: mot invalide dans la liste liée.\n");
+                struct LinkedList* temp = results;
+                while (temp->next != NULL) {
+                    temp = temp->next;  // Recherche de la fin de la liste
+                }
+                temp->next = newNode;  // Ajout du nouveau noeud à la fin
             }
-            iterList = iterList->next;
+        }
+        currentNode = currentNode->next;  // Passage au noeud suivant
+    }
+
+    if (results != NULL) {
+        struct LinkedList* resultNode = results;
+        
+        // Parcours de la liste des résultats pour imprimer les correspondances
+        while (resultNode != NULL) {
+            struct Word* wordResult = (struct Word*) resultNode->data;  // Cast vers Word*
+            print_search_match(wordResult);  // Affichage du résultat
+            resultNode = resultNode->next;
         }
     } else {
-        printf("Aucun mot trouvé pour le mot: %s\n", word);
+        printf("Aucun mot trouvé pour le mot: %s\n", word);  // Si aucun résultat trouvé
     }
 }
+
 
 
 

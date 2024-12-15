@@ -64,30 +64,33 @@ int case_insensitive_match(void* data, void* type){
  * @return int 
  */
 int wildcard_match(void *data, void *type) {
-    if (data == NULL || type == NULL) {
-        return 0;
-    }
     struct Word* word = (struct Word*) data;
-    char* searchWord = (char*) type;
-    int wildcardType = check_if_wildcard(searchWord);
-    if (wildcardType == 0) {
-        size_t searchLen = strlen(searchWord) - 1;
-        if (strlen(word->word) >= searchLen) {
-            return strncmp(word->word, searchWord + 1, searchLen) == 0;
+    char* searchWord = (char *) type;
+
+    if (check_if_wildcard(searchWord) == 0) {
+        searchWord++;
+        size_t searchLen = strlen(searchWord);
+        size_t wordLen = strlen(word->word);
+        if (wordLen >= searchLen) {
+            return strcmp(word->word + wordLen - searchLen, searchWord) == 0;
         }
         return 0;
     }
-    if (wildcardType == 1) {
+    
+    if (check_if_wildcard(searchWord) == 1) {
         searchWord[strlen(searchWord) - 1] = '\0';
         return strncmp(word->word, searchWord, strlen(searchWord)) == 0;
     }
-    if (wildcardType == 2) {
-        searchWord++;
-        searchWord[strlen(searchWord) - 1] = '\0';
-        return strstr(word->word, searchWord) != NULL;
+    if (check_if_wildcard(searchWord) == 2) {
+        char* tempSearchWord = strdup(++searchWord);
+        tempSearchWord[strlen(tempSearchWord) - 1] = '\0';
+        int result = strstr(word->word, tempSearchWord) != NULL;
+        free(tempSearchWord);
+        return result;
     }
     return -1;
 }
+
 
 
 

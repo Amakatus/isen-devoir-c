@@ -4,6 +4,7 @@
 #include "search.h"
 #include "linkedlist.h"
 #include "stdlib.h"
+#include <string.h>
 
 
 #define READ_LIMIT 300
@@ -41,9 +42,9 @@ int main(int argc, char* argv[]) {
                 printf("Veuillez choisir une option (1-4): ");
                 int option;
                 scanf("%d", &option);
-                char* word = malloc(sizeof(char)*300);
                 printf("Veuillez entrer le mot cherche :\n");
-                scanf("%s", word);
+                char* word = malloc(sizeof(char) * 300);
+                scanf("%s",word);
                 switch (option) {
                     case 1:
                         printf("Word : %s\n",word);
