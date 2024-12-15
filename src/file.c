@@ -8,6 +8,13 @@
 
 #define READ_LIMIT 300
 
+/**
+ * @brief Cette fonction lis un fichier passer en paramètre, et sépare le fichier en mot avec strcspn. Ensuite, les tokens sont ajoutées en tant que mot grâce à add_word
+ * 
+ * @param fileName 
+ * @param wordList 
+ * @return int 
+ */
 int read_file(char* fileName, struct LinkedList** wordList) {
     FILE *file;
     char* state;
@@ -34,6 +41,14 @@ int read_file(char* fileName, struct LinkedList** wordList) {
     return 0;
 }
 
+
+/**
+ * @brief Vérifie si les fichiers du dossier passer en paramètres sont corrects. La fonction compare avec le tableau ASCII si les caractères sont des caractères que l'on trouve habituellement dans un texte.
+ * 
+ * @param argv 
+ * @param safeFiles 
+ * @param safeFileCount 
+ */
 void send_safe_file(char *argv[], char* safeFiles[], int* safeFileCount) {
     DIR *dir;
     struct dirent *dent;
