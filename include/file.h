@@ -4,5 +4,5 @@
 
 
 int read_file(char* fileName, struct LinkedList** wordList);
-void send_safe_file(const char *argv[], char* safeFiles[], int* safeFileCount);
+void send_safe_file(char *argv[], char* safeFiles[], int* safeFileCount);
 #endif
