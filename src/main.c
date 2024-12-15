@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
                 printf("\n------------------------ MENU ------------------------\n");
                 printf("1. Recherche exacte\n");
                 printf("2. Recherche insensible à la casse\n");
-                printf("3. Recherche avec joker\n");
+                printf("3. Recherche avec joker (Buggé) \n");
                 printf("4. Quitter\n");
                 printf("------------------------------------------------------\n");
                 printf("Veuillez choisir une option (1-4): ");
@@ -46,6 +46,7 @@ int main(int argc, char* argv[]) {
                 scanf("%s", word);
                 switch (option) {
                     case 1:
+                        printf("Word : %s\n",word);
                         search_exact_word(wordList,word);
                         free(word);
                         break;
